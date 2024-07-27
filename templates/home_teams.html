@@ -1,0 +1,49 @@
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Stardos+Stencil&display=swap');
+        .home-teams {
+            margin: 4em 0 4em 0;
+            
+        
+        }
+
+        .home-team-container {
+            display: grid;
+            padding: 0.5em;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .home-team-logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 0 auto;
+            display: block;
+            border-radius: 100%;
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: 0.5em;
+        }
+
+        @media only screen and (max-width: 540px) {
+            .home-team-logo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        
+    </style>
+</head>
+
+<div class="home-teams">
+    <fieldset>
+        <legend style="font-size: 200%;">Clubs in Season 7</legend>
+        <div class="home-team-container">
+            {% for team in teams %}
+            <div style="text-align: center;">
+                <img src="{{team.logo_url}}" class="home-team-logo">
+                <p><a style='color:black;' href='/teams/{{team.short_name}}'>{{team.name}}</a></p>
+            </div>
+            {% endfor %}
+        </div>
+    </fieldset>
+
+</div>

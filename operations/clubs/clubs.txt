@@ -1,0 +1,10 @@
+FC Blackburn,FCB,Blackburn,B,https://images.icps7.xyz/clubs/blackburn.png
+KH United,KHU,KH,A,https://images.icps7.xyz/clubs/kh.png
+Shockwave FC,SFC,Shockwave,A,https://images.icps7.xyz/clubs/shockwave.png
+Aragorns FC,AFC,Aragorns,B,https://images.icps7.xyz/clubs/aragorns.png
+FC Dark Demons,FCDD,Demons,B,https://images.icps7.xyz/clubs/demons.png
+XI Thunders,XIT,Thunders,B,https://images.icps7.xyz/clubs/thunders.png
+FC Young Destroyers,FCYD,Young,A,https://images.icps7.xyz/clubs/young.png
+Inter Striker,IS,Inter,A,https://images.icps7.xyz/clubs/inter.png
+FC Elite Warriors,FCEW,B,Elite,https://images.icps7.xyz/clubs/elite.png
+Chipa Squad FC,CSFC,Chipa,A,https://images.icps7.xyz/clubs/chipa.png

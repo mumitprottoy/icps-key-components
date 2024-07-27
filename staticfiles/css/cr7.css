@@ -1,0 +1,18 @@
+.cr7 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.cr7 > div {
+    width: 90%;
+    margin: 0 auto 0 auto;
+
+}
+
+.cr7 > div > h3 {
+    font-family: 'Audiowide', cursive;
+}
+
+.cr7 > div > img {
+    width: 100%;
+}

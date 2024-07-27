@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block login %}
+
+    <head>
+        <style>
+            .login-choice {
+                text-align: center;
+                width: fit-content;
+                padding: 2em;
+                border: 1px solid rgba(0,0,0,0.1);
+                margin: 3em auto 0 auto;
+            }
+            .login-choice > a {
+                border: 1px solid black;
+                color: black;
+                padding: 1em;
+                display: block;
+            }
+
+            @media only screen and (max-width:540px) {
+                .login-choice {
+                    padding: 1em;
+                    width: 80%;
+                }
+            }
+        </style>
+    </head>
+
+    <div class="login-choice">
+        <h3>How would you like to log in?</h3>
+        <a href="{% url 'team-login' %}">Login as Team</a>
+    </div>
+{% endblock login %}

@@ -1,0 +1,19 @@
+{% if user.is_authenticated %}
+
+    {% if pic %}
+        <a class="acc-url" href="/profile/{{user.username}}" style="right: 1em; bottom: 2em;">
+            <img class="acc-pic" src="{{pic.pic_url}}">
+        </a>
+    {% endif %}
+    
+    {% if player %}
+    <a class="acc-url" href="/teams/{{my_club.short_name}}" style="right: 1em; bottom: 6em;">
+        <img class="acc-pic" src="{{my_club.logo_url}}"> 
+    </a>
+    {% elif manager %}
+    <a class="acc-url" href="/teams/{{my_club.short_name}}" style="right: 1em; bottom: 6em;">
+        <img class="acc-pic" src="{{my_club.logo_url}}"> 
+    </a>
+    {% endif %}
+    
+{% endif %}

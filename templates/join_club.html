@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <head>
+        <style>
+            .select-club {
+                padding: 1em;
+                border: 1px solid black;
+                background-color: transparent;
+                color: black;
+            }
+            
+        </style>
+    </head>
+
+    <fieldset>
+        <legend style="font-size: 150%;">Choose Club</legend>
+        <form style="text-align: center;" method="POST">
+            {% csrf_token %}
+            <select name="short_name" class="select-club">
+                {% for c in clubs %}
+                    <option value="{{c.short_name}}">{{c.name}}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <button type="submit">Join</button>
+        </form>
+    </fieldset>
+{% endblock content %}

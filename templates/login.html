@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block login %}
+    
+<head>
+    <style>
+        .auth-field {
+            width: 250px;
+            padding: 1em;
+            margin: 0 auto 2em auto;
+            border: none;
+            border-bottom: 1px solid black;
+            border-radius: 0;
+            display: block;
+            background-color: transparent;
+        }
+
+        .auth-form {
+            border: 1px solid rgba(0,0,0,0.1);
+            background-color: rgba(255,255,255,0.8);
+            padding: 2em;
+            width: fit-content;
+            margin: 0 auto 0 auto;
+            text-align: center;
+        }
+
+        .names {
+            display: inline;
+            width: auto;
+        }
+
+        .auth-btn {
+            margin: 2em auto 2em auto;
+        }
+
+        @media only screen and (max-width:540px) {
+            .auth-field {
+                width: 90%;
+            }
+
+            .auth-form {
+                padding: 1em;
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+
+    <br><br>
+    {% include 'bg_cr7.html' %}
+    <form class="auth-form" method="post">
+        <h3>Change Password</h3>
+        <p style="color: red">{{err_msg}}</p>
+        
+        {% csrf_token %}
+        <input type="text" class="auth-field" name="username" placeholder="username" required>
+        <input type="password" class="auth-field" name="password" placeholder="password" required>
+        <button type="submit" class="auth-btn">Login</button>
+        <br>
+        <a href="{% url 'forgot-password' %}">Forgot Password?</a>
+        <br><br>
+        Or instead, <a href="{% url 'signup' %}"> signup.</a>
+    </form>
+    
+{% endblock login %}

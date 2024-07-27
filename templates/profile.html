@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <style>
+        .pro-pic {
+            width: 250px;
+            height: 250px;
+            border-radius: 100%;
+            margin: 0 auto 0 auto;
+            display: block;
+            box-shadow: 0 1px 4px grey;
+            padding: 0.5em;
+        }      
+       
+        .player-club-logo {
+            width: 15px;
+            height: 15px;
+            border-radius: 100px;
+            padding: 0px;
+        }
+        .options {
+            color: rgba(0,0,0,0.5);
+            margin: 0.5em;
+            display: inline-block;
+        }
+        .small-personal-info {
+            color: rgba(0,0,0,0.3);
+        }
+
+        .are-you-sure {
+            width: fit-content;
+            padding: 0.5em;
+            border: 1px solid red;
+            border-radius: 5px;
+            margin: 1em 0 1em 0;
+
+        }
+        @media only screen and (max-width:540px) {
+            .small-personal-info {
+                font-size: 50%;
+            }
+        }
+    </style>
+</head>
+
+    <img src="{{pic_.pic_url}}" class="pro-pic">
+    <br>
+
+        <fieldset>
+            <legend>Personal Info</legend>
+            <p><b>{{user_.first_name}} {{user_.last_name}}</b></p>
+            <p class="small-personal-info">
+                <span>
+                    <span class="fa fa-user-circle"></span>
+                    <span>{{user_.username}}</span>
+                </span>
+                &nbsp;|&nbsp;
+                <!-- <br> -->
+                <span>
+                    <span class="fa fa-envelope"></span>
+                    <span>{{user_.email}}</span>
+                </span>
+            </p>
+        </fieldset>
+
+        <fieldset>
+
+            <legend>Club Info<span id="role"></span></legend>
+            <script>
+                const role = document.getElementById('role');
+            </script>
+            {% if user_manager %}
+                {% if user_player %}
+                    <script>
+                        role.innerText=": Player/Manager"
+                    </script>
+                {% else %}
+                    <script>
+                        role.innerText=': Manager'
+                    </script>
+                {% endif %}
+
+            {% else %}
+                    {% if user_player %}
+                        <script>
+                            role.innerText=': Player'
+                        </script>
+                    {% endif %}
+            {% endif %}
+
+            
+            {% if user_player %}
+            {% if user_player.kit_number %}
+                {% if user_player.kit_name %}
+                <span style="color: rgba(0,0,0,0.3);">{{user_player.kit_number}} {{user_player.kit_name}}</span><br>
+                {% endif %}
+            {% endif %}
+            <a href="/teams/{{user_club.short_name}}" style="color: black;">
+                <img src="{{user_club.logo_url}}" class="player-club-logo">
+                <b>{{user_club.name}}</b>
+            </a>
+            {% elif user_manager %}
+            <a href="/teams/{{user_club.short_name}}" style="color: black;">
+                <img src="{{user_club.logo_url}}" class="player-club-logo">
+                <b>{{user_club.name}}</b>
+            </a> 
+            {% else %}
+            <p style="color: rgba(0,0,0,0.3);">No club.</p>
+            {% endif %}
+
+            {% if user_player %}
+                <br><br>
+                <a class="options" href="http://">
+                    <span class="fa fa-bar-chart"></span>
+                    Player Stats
+                </a>
+                
+            {% endif %}
+
+            {% if my_profile %}
+                {% if join_req %}
+               
+                    {% if join_req.is_approved %}
+                    <br><br>
+                    <a href="javascript:toggleLeaveDialogue()" style="color: red; background-color: white; border: 1px solid red; padding: 5px; border-radius: 5px; text-decoration: none;"><span class="fa fa-sign-out"></span> Leave Club</a>
+                    <br>
+                    <div id="sure?" style="display: none;" class="are-you-sure">
+                        <p>Are you sure?</p>
+                        <a href="javascript:toggleLeaveDialogue()" style="color: rgba(0,0,0,0.3);"> Cancel</a>
+                        &nbsp;&nbsp;
+                        <a href="/leave-club/{{my_club.short_name}}" style="color: red;">Yes, I am leaving</a>
+                    </div>
+                
+                    <script>
+                        const toggleLeaveDialogue = () => {
+                            const sure = document.getElementById('sure?');
+                            sure.style.display = {
+                                'none': 'block', 'block': 'none'
+                            }[sure.style.display]
+                        }
+                    </script>
+                    {% else %}
+                    <div style="width: fit-content; padding: 1em; border: 1px solid rgba(0,0,0,0.1); border-radius: 5px;">
+                    <p>Join Request Pending.</p>
+                    <a href="/teams/{{my_requested_club.short_name}}" style="color: black;">
+                        <img src="{{my_requested_club.logo_url}}" class="player-club-logo">
+                        <b>{{my_requested_club.name}}</b>
+                    </a>
+
+                    <br><br>
+                    <a href="javascript:toggleDeleteDialogue()" style="color: red; background-color: white; border: 1px solid red; padding: 5px; border-radius: 5px; text-decoration: none;"><span class="fa fa-sign-out"></span> Delete Join Request</a>
+                    <br>
+                    <div id="sure?" style="display: none;" class="are-you-sure">
+                        <p>Are you sure?</p>
+                        <a href="javascript:toggleDeleteDialogue()" style="color: rgba(0,0,0,0.3);"> Cancel</a>
+                        &nbsp;&nbsp;
+                        <a href="{% url 'delete-join-request' %}" style="color: red;">Yes, Delete Join Request</a>
+                    </div>
+                
+                    <script>
+                        const toggleDeleteDialogue = () => {
+                            const sure = document.getElementById('sure?');
+                            sure.style.display = {
+                                'none': 'block', 'block': 'none'
+                            }[sure.style.display]
+                        }
+                    </script>
+                    </div>
+
+                    {% endif %}                    
+                {% endif %}
+
+                    {% if manager %}
+                    {% elif player %}
+                    {% elif join_req %}
+                    {% else %}
+                    <a href="{% url 'join-club' %}" style="color: blue; background-color: white; border: 1px solid blue; padding: 5px; border-radius: 5px; text-decoration: none;"><span class="fa fa-sign-in"></span> Join Club</a>
+                    {% endif %}
+            {% endif %}
+
+                
+            </fieldset>
+
+            {% if my_profile %} 
+            <fieldset>
+                <legend>Options</legend>
+                <a href="{% url 'set-profile-picture' %}" class="options">
+                    <span class="fa fa-image"></span>
+                     Change Profile Picture
+                </a>
+                <a href="{% url 'change-password' %}" class="options">
+                    <span class="fa fa-key"></span>
+                     Change Password
+                </a>
+                
+                {% if player %}
+                <a href="{% url 'set-kit-name-and-number' %}" class="options">
+                    <span class="fa fa-tshirt"></span>
+                     Kit Name & Number
+                </a>
+                    
+                {% endif %}
+            </fieldset>
+            {% endif %}
+
+
+    
+{% endblock content %}

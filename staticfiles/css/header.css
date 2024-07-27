@@ -1,0 +1,56 @@
+
+header {
+    /* box-shadow: 0 1px 4px grey; */
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 0.5em 0 0.5em 0;
+    position: fixed;
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);
+    /* background-color: rgba(255,255,255,0.9); */
+    top: 0;
+}
+
+.menu-icon-container {
+    text-align: center;
+    font-size: 150%;
+}
+
+.menu-icon-container > a {
+    color: white;
+}
+
+.nav-bar {
+    padding: 0.5em 0 0.5em 0;
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+
+.nav-bar, .menu {
+    width: 80%;
+    margin: 0 auto 0 auto;
+}
+
+.menu > a {
+    padding: 0.5em;
+    color: white;
+    display: block;
+    width: fit-content;
+    text-decoration: none;
+}
+
+.menu {
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+
+
+
+@media only screen and (max-width: 540px) {
+    .nav-bar, .menu {
+        width: 90%;
+    }
+}
